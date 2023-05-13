@@ -1,0 +1,87 @@
+#Pasa tamiz para realizar grafica granulometrica
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+Tamiz = pd.Series([                  # Numero de malla
+    '1 1/2"',                        # Numero de malla
+    '1"',                            # Numero de malla
+    '3/4"',                          # Numero de malla
+    '3/8"',                          # Numero de malla
+    'Nº 4',                          # Numero de malla
+    'Nº 10',                         # Numero de malla
+    'Nº 20',                         # Numero de malla
+    'Nº 40',                         # Numero de malla
+    'Nº 60',                         # Numero de malla
+    'Nº 100',                        # Numero de malla
+    'Nº 200'                         # Numero de malla
+])
+
+Abertura =pd.Series([                # Numero de abertura en mm
+    37.5,                            # Numero de abertura en mm
+    25.4,                            # Numero de abertura en mm
+    19.0,                            # Numero de abertura en mm
+    9.51,                            # Numero de abertura en mm
+    4.75,                            # Numero de abertura en mm
+    2.00,                            # Numero de abertura en mm
+    0.85,                            # Numero de abertura en mm
+    0.42,                            # Numero de abertura en mm
+    0.25,                            # Numero de abertura en mm
+    0.15,                            # Numero de abertura en mm
+    0.074,                           # Numero de abertura en mm
+])
+
+Retenido =pd.Series([               # Peso retenido en tamiz en gramos
+    1,                              # Peso retenido en tamiz en gramos
+    1,                              # Peso retenido en tamiz en gramos
+    0,                              # Peso retenido en tamiz en gramos
+    252,                            # Peso retenido en tamiz en gramos
+    406,                            # Peso retenido en tamiz en gramos
+    805,                            # Peso retenido en tamiz en gramos
+    869,                            # Peso retenido en tamiz en gramos
+    334,                            # Peso retenido en tamiz en gramos
+    95,                             # Peso retenido en tamiz en gramos
+    53,                             # Peso retenido en tamiz en gramos
+    18                              # Peso retenido en tamiz en gramos
+])
+
+Retenido_Acumulado =pd.Series([              # Peso retenido acumulado en gramos
+    0,                                       # Peso retenido acumulado en gramos
+    0 + 1,                                   # Peso retenido acumulado en gramos más retenido en gramos
+    1 + 0,                                   # Peso retenido acumulado en gramos más retenido en gramos
+    1 + 252,                                 # Peso retenido acumulado en gramos más retenido en gramos
+    253 + 406,                               # Peso retenido acumulado en gramos más retenido en gramos
+    659 + 805,                               # Peso retenido acumulado en gramos más retenido en gramos
+    1464 + 869,                              # Peso retenido acumulado en gramos más retenido en gramos
+    2333 + 334,                              # Peso retenido acumulado en gramos más retenido en gramos
+    2667 + 95,                               # Peso retenido acumulado en gramos más retenido en gramos
+    2762 + 53,                               # Peso retenido acumulado en gramos más retenido en gramos
+    2815 + 18,                               # Peso retenido acumulado en gramos más retenido en gramos
+])
+
+Pasa_tamiz =pd.Series([                         # 2900 = Peso total de la muestra (g)
+    2900 - 0,                                   # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 1,                                   # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 1,                                   # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 253,                                 # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 659,                                 # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 1464,                                # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 2333,                                # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 2667,                                # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 2762,                                # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 2815,                                # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+    2900 - 2833,                                # 2900 = Peso total de la muestra (g) menos peso retenido acumulado (g)
+])
+
+Estructura = pd.DataFrame({
+    'Tamiz':Tamiz,
+    'Abertura' : Abertura,
+    'Retenido (g)' : Retenido,
+    'Retenido_acumulado (g)' : Retenido_Acumulado,
+    'Pasa_tamiz (g)' : Pasa_tamiz,
+    'Porcentaje_pasa_tamiz (%)' : (Pasa_tamiz/2900)*100
+})
+
+round(Estructura,2)
