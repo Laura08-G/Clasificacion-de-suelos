@@ -1,0 +1,203 @@
+#Para clasificar los suelos se tiene en cuenta el Coeficiente de uniformidad (Cu) y grado de curvatura de la granulometría (cc), Indice de plasticidad (ip), Limite liquido (LL),Grava, Arena y finos
+#Clasificacion_de_suelos(finos,arena,grava,cu,cc,ip,LL)
+#Suelos de Granulado-grueso que en la naturaleza son gravosos y arenosos con menos del 50% que pasa a través del tamiz #200. Los símbolos de grupo comienzan con los prefijos G ó S o ambos. G simboliza suelo con grava o gravoso, y S es para suelos con arena o arenosos.
+#Suelos de Granulado-fino con 50% o más que pasa a través del tamiz #200. Los símbolos de grupo comienzan con el prefijo de M, el cual simboliza a limos inorgánicos, C para arcillas inorgánicas, y O para limos y arcillas orgánicos. El símbolo Pt es usado para la turba (peat), fango (muck), y otros suelos altamente orgánicos. 
+
+# Se recomienda ingresar los valores solicitados
+
+# Si el suelo es grano grueso y cumple las condiciones, NO le solicita LL, IP, le indicara que el suelo es grueso y para el desarrollo del código.
+# Si el suelo es grano fino le pedira que ingrese los valores de las variables requeridas para graficar en la carta de plasticidad.
+
+# Desarrollo del código
+
+
+Tamiz_200 = int(input("Ingresa valor de porcentaje de suelo que pasa Tamiz #200 (%): "))  #valor en porcentaje % para suelo fino
+  
+if Tamiz_200 <= 50:
+  print("PASA TAMIZ #200, EL SUELO ES GRADADO FINO")
+
+  Tamiz_4 = int(input("Porcentaje de suelo de 'fino' que pasa Tamiz #200 (%): "))  #valor en porcentaje % para suelo grueso
+
+  if Tamiz_4 <= 50:
+    print("PASA TAMIZ #200, EL SUELO ES GRADADO GRUESO")
+    
+    Pt = int(input("Porcentaje de suelo de 'grueso' que pasa Tamiz #200 (%): "))   #Si el suelo es turba (peat), clasifíquelo como Pt,Para todos los demás suelos, determine el porcentaje de suelo que pasa a través del tamiz #200 
+    
+
+    if Pt < 5:
+      print("Ingresa valores de Cu y Cc: ")                                       # Menos del 5% pasa por el tamiz #200, Cu = D60/D10 mayor o igual a 4; Cc =(D30)2/(D10 x D60) entre 1 y 3 
+
+      cu= int(input("Coeficiente de uniformidad: "))                                #cu = Coeficiente de uniformidad
+      
+      cc= int(input("Coeficiente de curvatura ó grado de curvatura de la granulometría: "))      #cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+      
+    elif cu >= 4 and 1 <= cc <= 3:                                                 #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+        print("SUELO CON GRAVA BIEN GRADADA (GW) ")                                #GW = Suelo con grava bien gradada
+
+    elif cu < 4 and 1 > cc > 3:                                                    #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+        print("SUELO CON GRAVA MAL GRADADA (GP) ")                                 #GP = Suelo con grava mal gradada
+    
+    if 5 <= Pt <= 12:                                                              #Si el suelo es turba (peat), clasifíquelo como Pt,Para todos los demás suelos, determine el porcentaje de suelo que pasa a través del tamiz #200 
+      print("Ingresa valores de Cu y Cc: ")                                        #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+
+      cu= int(input("Coeficiente de uniformidad: "))                               #cu = Coeficiente de uniformidad
+
+      cc= int(input("Coeficiente de curvatura ó grado de curvatura de la granulometría "))   #cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+
+      if cu >= 4 and 1 <= cc <= 3:                                               #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+        print("Ingresa valor de IP sobre la linea A (%): ")                      #IP = Indice de Plasticidad en %
+        IP= int(input("Indice de plasticidad sobre la linea A (%): "))           #IP = Indice de Plasticidad en %
+        
+      elif 4 <= IP <= 7:                                                         #IP = Indice de Plasticidad en %
+        print("SUELO DE GRAVA BIEN GRADADA CON LIMO (GW-GM) ")                   #GW - GM = Suelo de grava bien gradada con limo
+         
+      else:
+        print("SUELO DE GRAVA BIEN GRADADA CON ARCILLA (GW-GC) ")                #GW - GC = Suelo de grava bien gradada con arcilla   
+
+      if cu < 4 and 1 > cc > 3:                                                  #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+        print("Ingrese el valor de IP sobre la linea A (%): ")                   #IP = Indice de Plasticidad en %
+        IP= int(input("Indice de plasticidad sobre la linea A (%): "))           #IP = Indice de Plasticidad en %
+        
+        if 4 <= IP <= 7:                                                         #IP = Indice de Plasticidad en %
+          print("SUELO DE GRAVA MAL GRADADA CON LIMO (GP-GM) ")                  #GP -GM = Suelo de grava mal gradada con limo 
+      
+      else:
+        print("SUELO DE GRAVA MAL GRADADA CON ARCILLA (GP-GC) ")                 #GP -GC = Suelo de grava mal gradada con arcilla
+
+    if Pt > 12:                                                                  #Si el suelo es turba (peat), clasifíquelo como Pt,Para todos los demás suelos, determine el porcentaje de suelo que pasa a través del tamiz #200 
+      print("Ingresa el valor de IP(%): ")                                       #IP = Indice de Plasticidad en %
+      IP= int(input("Indice de plasticidad (%): "))                              #IP = Indice de Plasticidad en %
+
+    elif IP < 4:                                                                 #IP = Indice de Plasticidad en %
+      print("SUELO DE GRAVA LIMOSA (GM) ")                                       #GM = Suelo de grava limosa
+      
+    elif IP > 7:                                                                 #IP = Indice de Plasticidad en %
+      print("SUELO DE GRAVA ARCILLOSA (GC) ")                                    #GC = Suelo de grava arcillosa
+
+    elif 4 <= IP <= 7:                                                           #IP = Indice de Plasticidad en %
+      print("SUELO DE GRAVA PROBABLEMENTE BIEN GRADADA CON LIMOS O ARCILLAS(GW) O SUELO DE GRAVA PROBABLEMENTE MAL GRADADA CON LIMOS O ARCILLAS(GP), Ingresar de nuevo 'Porcentaje de suelo de 'gruesos' que pasa Tamiz N 200 (%)' ")
+
+while(Tamiz_4 > 50):
+  print("PASA TAMIZ #200, EL SUELO ES GRADADO GRUESO")
+  break
+
+  if Tamiz_4 > 50:
+    print("Suelos arenosos")
+
+    Pt = int(input("Porcentaje de suelo de 'grueso' que pasa Tamiz N 200 (%): ")) #Si el suelo es turba (peat), clasifíquelo como Pt,Para todos los demás suelos, determine el porcentaje de suelo que pasa a través del tamiz #200 
+
+    if Pt < 5:                                                                    #Si el suelo es turba (peat), clasifíquelo como Pt,Para todos los demás suelos, determine el porcentaje de suelo que pasa a través del tamiz #200 
+      print("Ingresa valores de Cu y Cc: ")                                       #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+
+      cu= int(input("Coeficiente de uniformidad: "))                              #cu = Coeficiente de uniformidad
+
+      cc= int(input("Coeficiente de curvatura ó grado de curvatura de la granulometría:"))  #cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+      
+    elif cu >= 6 and 1 <= cc <= 3:                                               #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+      print("SUELO CON ARENA BIEN GRADADA (SW) ")                                #SW = Suelo con arena bien gradada
+
+    elif cu < 6 and 1 > cc > 3:                                                  #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+      print("SUELO CON ARENA MAL GRADADA (SP) ")                                 #SP = Suelo con arena mal gradada
+    
+    if 5 <= Pt <= 12:                                                            #El porcentaje que pasa el tamiz #200 esta entre 5 a 12%
+      print("Ingresa los valores de Cu y Cc: ")                                  #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+
+      cu= int(input("Coeficiente de uniformidad: "))                             #cu = Coeficiente de uniformidad
+
+      cc= int(input("Coeficiente de curvatura ó grado de curvatura de la granulometría "))  #cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+
+      if cu >= 6 and 1 <= cc <= 3:                                               #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+        print("Ingresa el valor de IP en zona sombreada (%): ")                  # IP = Indice de Plasticidad %
+        IP= int(input("Indice de plasticidad en zona sombreada (%): "))          # IP = Indice de Plasticidad %
+        
+      elif 4 <= IP <= 7:                                                         # IP = Indice de Plasticidad %
+        print("SUELO DE ARENA BIEN GRADADA CON LIMOS (SW-SM) ")                  #SW-SM = Suelo de arena bien gradada con limos
+         
+      else:
+        print("SUELO DE ARENA BIEN GRADADA CON ARCILLA (SW-SC) ")                #SW-SC = Suelo de arena bien gradada con arcilla
+
+      if cu < 6 and 1 > cc > 3:                                                  #cu = Coeficiente de uniformidad y cc = Coeficiente de curvatura ó grado de curvatura de la granulometría
+        print("Ingresa el valor de IP en zona sombreada (%): ")                  # IP = Indice de Plasticidad %
+        IP= int(input("Ingresa indice de plasticidad en zona sombreada (%): "))  # IP = Indice de Plasticidad %
+        
+      elif 4 < IP < 7:                                                           # IP = Indice de Plasticidad %
+        print("SUELO DE ARENA MAL GRADADA CON LIMOS (SP-SM) ")                   #SP-SM = Suelo de arena mal gradada con limos
+         
+      else:
+        print("SUELO DE ARENA MAL GRADADA CON ARCILLA (SP-SC) ")                 #SP-SC = Suelo de arena mal gradada con arcilla
+
+    if Pt > 12:                                                                  #Si el suelo es turba (peat), clasifíquelo como Pt,Para todos los demás suelos, determine el porcentaje de suelo que pasa a través del tamiz #200 
+      IP= int(input("Indice de plasticidad (%): "))                              # IP = Indice de Plasticidad %
+      print("Ingresa el valor de IP (%): ")                                      # IP = Indice de Plasticidad %
+
+    if IP < 4:                                                                   # IP = Indice de Plasticidad %
+      print("SUELO DE ARENA LIMOSA (SM) ")                                       #SM = Suelo de arena limosa
+        
+    if IP > 7:                                                                   # IP = Indice de Plasticidad %
+      print("SUELO DE ARENA ARCILLOSA (SC) ")                                    #SC = Suelo de arena arcillosa
+
+    elif 4 <= IP <= 7:                                                           # IP = Indice de Plasticidad %
+      print("ARENA MAL GRADADA, ARENAS GRAVOSAS, POCO O NINGÚN FINO (SP) Ó ARENA BIEN GRADADA (SW), INGRESA DE NUEVO EL 'Porcentaje de suelo de 'grueso' que pasa Tamiz #200 (%):' ")
+  
+  if Tamiz_200 >= 50:
+    print("Suelos limosos o arcillosos")
+    LL = int(input("Ingresa porcentaje de Limite liquido que contiene el suelo (%): "))     #LL = Limite liquido que contiene el suelo (%)
+  
+    if LL < 50:                                                                    #LL = Limite liquido que contiene el suelo (%)
+      print("Ingresa el valor de IP: ")                                            # IP = Indice de Plasticidad %
+      IP= int(input("Ingresa indice de plasticidad (%): "))                        #IP = Indice de plasticidad %
+          
+      if IP < 4:                                                                   # IP = Indice de Plasticidad %
+        limo = int(input("Porcentaje de suelo que pasa Tamiz #200: "))
+        print("Ingresa porcentaje de suelo que pasa Tamiz #200: ")
+
+        if limo < 30:
+          print("SUELO DE LIMOS INORGÁNICOS DE BAJA COMPRESIBILIDAD (ML) ")        #ML = Suelo de limos inorganicos de baja compresibilidad
+
+        if limo >= 30:
+          print("SUELO DE LIMOS ARENOSOS INORGÁNICOS (ML) ")                       #ML = Suelo de limos inorganicos
+          
+    if 4 <= IP <= 7:                                                               # IP = Indice de Plasticidad %
+      print("Ingresa porcentaje de suelo que pasa Tamiz #200: ")
+      limo = int(input("Porcentaje de suelo que pasa Tamiz #200: "))
+
+      if limo < 30:
+        print("SUELO DE ARCILLA LIMOSA (CL-ML) ")                                  #CL-ML = Suelo de arcilla limosa, Suelo inorgánico; limites de Atterberg caen en el área oscura
+
+      if limo >= 30:
+        print("SUELO DE ARCILLA LIMOSA ARENOSA (CL-ML) ")                          #CL-ML = Suelo de arcilla limosa arenosa
+              
+    if IP > 7:                                                                     # IP = Indice de Plasticidad %
+      print("Ingresa porcentaje de suelo que pasa Tamiz #200: ")
+      limo = int(input("Ingresa porcentaje de suelo que pasa Tamiz #200: "))
+    
+      if limo < 30:
+        print("SUELO DE ARCILLAS INORGÁNICAS DE BAJA COMPRESIBILIDAD (CL) ")       #CL= Suelo de arcillas inorganicas de baja compresibilidad <30
+                
+      if limo >= 30:
+        print("SUELO DE ARCILLA LIGERA ARENOSA INORGÁNICA (CL) ")                  #CL = Suelo de arcilla ligera arenosa inorganica >=30
+          
+          
+  if LL >= 50:                                                                      #LL = Limite liquido que contiene el suelo (%)
+    print("Indique si IP se encuentra 'Sobre' o 'abajo' de la linea A introduciendo '0' o '1': ")
+    PIP = int(input("¿IP 'Sobre' o 'abajo' de la linea A?: "))                      #PIP = Posición de Indice de Plasticidad en la curva granulomètrica"
+    
+    if PIP == 1:                                                                    #PIP = Posición de Indice de Plasticidad en la curva granulomètrica"
+      print("Ingresa porcentaje de suelo que pasa Tamiz #200: ")
+      limo = int(input("Porcentaje de suelo que pasa Tamiz #200: "))
+      
+    elif limo < 30:
+      print("SUELO DE ARCILLAS INORGÁNICAS DE ALTA COMPRESIBILIDAD (CH) ")         #CH = Suelo de arcillas inorganicas de alta compresibilidad <30
+              
+    elif limo >= 30:
+      print("SUELO DE ARCILLA DENSA ARENOSA (CH) ")                                #CH = Suelo de arcilla densa arenosa >=30
+
+    if PIP == 0:                                                                   #PIP = Posición de Indice de Plasticidad en la curva granulomètrica"
+      print("Ingresa porcentaje de suelo que pasa Tamiz #200: ")
+      limo = int(input("Porcentaje de suelo que pasa Tamiz #200: "))
+          
+    elif limo < 30:
+      print("LIMOS INORGÁNICOS DE ALTA COMPRESIBILIDAD (MH) ")                     #MH = Limos inorganicos de alta compresibilidad
+        
+    elif limo >= 30:
+        print("SUELO DE LIMO ELÁSTICO ARENOSO (CH) ")                              #CH = Suelo de limo elastico arenoso
