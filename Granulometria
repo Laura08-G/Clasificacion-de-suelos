@@ -1,0 +1,22 @@
+# GRAFICA DE GRANULOMETRIA
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+Pasa_tamiz = [67, 85, 138, 233, 567, 1436, 2241, 2647, 2899, 2899, 2900]
+Abertura = [0.07, 0.15, 0.25, 0.42, 0.85, 2.00, 4.75, 9.51, 19.0, 25.4, 37.5]
+
+plt.plot(Abertura, Pasa_tamiz, color='red', lw= 2)
+
+plt.xscale('log')                             # escala logaritmica
+
+plt.title("Curva de ganulometria",fontsize=10)
+plt.xlabel("Tamaño de abertura (mm)",fontsize=10)
+plt.ylabel("porcentaje que pasa",fontsize=10)                                   
+
+plt.gca().invert_xaxis()                               # sentencia que invierte el eje x
+
+plt.grid(True, which="minor", linestyle='-')           # grilla log en eje x
+plt.grid(True, linestyle='-')                          # grilla normal en eje y
+
+plt.show()
